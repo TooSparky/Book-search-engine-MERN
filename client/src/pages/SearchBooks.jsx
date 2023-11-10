@@ -29,6 +29,8 @@ const SearchBooks = () => {
     return () => saveBookIds(savedBookIds);
   });
 
+  const [saveBook] = useMutation(SAVE_BOOK);
+
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -65,8 +67,6 @@ const SearchBooks = () => {
   const handleSaveBook = async (bookId) => {
     // find the book in `searchedBooks` state by the matching id
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
-
-    const [saveBook] = useMutation(SAVE_BOOK);
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;

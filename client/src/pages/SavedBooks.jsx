@@ -16,6 +16,9 @@ import { removeBookId } from '../utils/localStorage';
 const SavedBooks = () => {
   const [userData, setUserData] = useState({});
 
+  const getMe = useMutation(GET_ME);
+  const removeBook = useMutation(REMOVE_BOOK);
+
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
 
@@ -23,8 +26,6 @@ const SavedBooks = () => {
     const userData = async () => {
       try {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-        const getMe = useMutation(GET_ME);
 
         if (!token) {
           return false;
@@ -49,8 +50,6 @@ const SavedBooks = () => {
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-    const removeBook = useMutation(REMOVE_BOOK);
 
     if (!token) {
       return false;
@@ -79,7 +78,7 @@ const SavedBooks = () => {
 
   return (
     <>
-      <div fluid className="text-light bg-dark p-5">
+      <div className="text-light bg-dark p-5">
         <Container>
           <h1>Viewing saved books!</h1>
         </Container>
@@ -93,8 +92,8 @@ const SavedBooks = () => {
         <Row>
           {userData.savedBooks.map((book) => {
             return (
-              <Col md="4">
-                <Card key={book.bookId} border='dark'>
+              <Col key={book.bookId} md="4">
+                <Card border='dark'>
                   {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null}
                   <Card.Body>
                     <Card.Title>{book.title}</Card.Title>
