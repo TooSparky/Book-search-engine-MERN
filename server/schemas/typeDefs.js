@@ -19,7 +19,7 @@ const typeDefs = `
     }
 
     type Book {
-        bookId: Int
+        bookId: String
         authors: [String]
         description: String
         title: String

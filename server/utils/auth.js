@@ -1,10 +1,10 @@
-require('dotenv').config();
+// require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const { GraphQLError } = require('graphql');
 
 // set token secret and expiration date
-const secret = 'asfjdslafj';
-const expiration = '2h';
+const secret = 'secret';
+const expiration = '100000';
 
 module.exports = {
   AuthenticationError: new GraphQLError('Could not authenticate user.', {
@@ -30,9 +30,8 @@ module.exports = {
     try {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
-    } catch {
-      console.log('Invalid token');
-      return res.status(400).json({ message: 'invalid token!' });
+    } catch (err) {
+      return console.error(err);
     }
 
     // send to next endpoint
