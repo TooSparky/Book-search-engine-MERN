@@ -6,8 +6,8 @@ const typeDefs = `
     type Mutation {
         loginUser(email: String!, password: String!): Auth
         createUser(username: String!, email: String!, password: String!): Auth
-        saveBook(authors: String, description: String, title: String, bookId: String, image: String, link: String): User
-        deleteBook(bookId: Int): User
+        saveBook(bookId: String, title: String, authors: String, description: String, image: String, link: String): User
+        deleteBook(bookId: String): User
     }
 
     type User {
